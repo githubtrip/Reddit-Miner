@@ -1,4 +1,4 @@
-# Reddit-Scraper
+# Reddit Miner
 Scrapes a subreddit for all the user submissions using the pushshift API 
 
 <h2>How to use </h2>

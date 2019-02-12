@@ -14,6 +14,9 @@ def validate_input(subreddit):
     return False
 
 
+
+
+
 while True:
     try:
         subreddit = input("Input in the subreddit you'd like to scrape: ")
@@ -24,6 +27,7 @@ while True:
 
 #setting y=0 to count the posts
 y=0
+
 
 #getting the current time so the API can use the most current possiable
 post_time = int(time.time())
@@ -48,6 +52,17 @@ nloopsreq = loopsreqint
 print(loopsreqint)
 print(last_posts)
 
+def get_info(i):
+
+    post_id = json_data['data'][i]['id']
+    post_title = json_data['data'][i]['title']
+    post_author = json_data['data'][i]['author']
+    post_time = json_data['data'][i]['created_utc'] 
+    print('\n%s' %y)
+    #writing to the csv
+    filewrite.writerow([y, post_id, post_title, post_author, post_time])
+
+
 with open(subreddit + '.csv', 'w', encoding='utf-8', newline='') as csvfile:
 
     filewrite=csv.writer(csvfile)
@@ -69,23 +84,12 @@ with open(subreddit + '.csv', 'w', encoding='utf-8', newline='') as csvfile:
             #Looping through to get the 1000 posts, getting the title and the time
             for i in range(1000):
 
-                post_id = json_data['data'][i]['id']
-                post_title = json_data['data'][i]['title']
-                post_author = json_data['data'][i]['author']
-                post_time = json_data['data'][i]['created_utc']
+                get_info(i)
                 y = y + 1
-                print('\n%s' %y)
-                #writing to the csv
-                filewrite.writerow([y, post_id, post_title, post_author, post_time])
-
         else:
-            for c in range(last_posts):
 
-                post_id = json_data['data'][c]['id']
-                post_title = json_data['data'][c]['title']
-                post_author = json_data['data'][c]['author']
-                post_time = json_data['data'][c]['created_utc']
+            i=0
+            for i in range(last_posts):
+
+                get_info(i)
                 y = y + 1
-                print('\n%s' %y)
-                #writing to the csv
-                filewrite.writerow([y, post_id, post_title, post_author, post_time])

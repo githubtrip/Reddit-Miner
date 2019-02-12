@@ -13,10 +13,6 @@ def validate_input(subreddit):
         return True
     return False
 
-
-
-
-
 while True:
     try:
         subreddit = input("Input in the subreddit you'd like to scrape: ")

@@ -24,7 +24,6 @@ while True:
 #setting y=0 to count the posts
 y=0
 
-
 #getting the current time so the API can use the most current possiable
 post_time = int(time.time())
 
@@ -37,7 +36,6 @@ post_amount = json_data['metadata']['total_results']
 loopsreq= (post_amount/1000)
 #finding the mod of 1000 posts to see what is left for when we loop through the API
 last_posts = (post_amount%1000)
-
 
 #rounding down to get the interger amount
 loopsreqint = math.ceil(loopsreq)
@@ -57,7 +55,6 @@ def get_info(i):
     print('\n%s' %y)
     #writing to the csv
     filewrite.writerow([y, post_id, post_title, post_author, post_time])
-
 
 with open(subreddit + '.csv', 'w', encoding='utf-8', newline='') as csvfile:
 
@@ -79,13 +76,10 @@ with open(subreddit + '.csv', 'w', encoding='utf-8', newline='') as csvfile:
 
             #Looping through to get the 1000 posts, getting the title and the time
             for i in range(1000):
-
                 get_info(i)
                 y = y + 1
         else:
-
             i=0
             for i in range(last_posts):
-
                 get_info(i)
                 y = y + 1

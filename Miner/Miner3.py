@@ -28,13 +28,14 @@ y=0
 # to get epoch time - !date "+%s" -d "02/20/2013 08:41:15"
 # to get current epoch time - !date '+%s'
 # epoch to day convert - !date -d @1591699036
-after_time = ""
-before_time = ""
+after_time = "1514764800"
+before_time = "1517443200"
 
 #loading up the API
 posts_API= 'https://api.pushshift.io/reddit/search/submission/?subreddit=' + subreddit + '&metadata=true&sort_type=score&sort=desc&size=0&after=' + after_time + '&before=' + before_time
 json_data = requests.get(posts_API).json()
 post_amount = json_data['metadata']['total_results']
+print(post_amount)
 
 #as we are limited to 1000 submisisons at a time we must divide by 1000 to get the number of requests to do
 loopsreq= (post_amount/1000)
@@ -57,21 +58,18 @@ def get_info(i):
     post_author = json_data['data'][i]['author']
     post_time = json_data['data'][i]['created_utc']
     post_fullurl = json_data['data'][i]['full_link']
-    post_originalcontent = json_data['data'][i]['is_original_content']
     post_numcomments = json_data['data'][i]['num_comments']
     post_numcrossposts = json_data['data'][i]['num_crossposts']
     post_score = json_data['data'][i]['score']
-    post_awards = json_data['data'][i]['total_awards_received']
-    post_upvote_ratio = json_data['data'][i]['upvote_ratio']
     post_video_url = json_data['data'][i]['url']
     print('\n%s' %y)
     #writing to the csv
-    filewrite.writerow([y, post_id, post_title, post_author, post_time, post_fullurl, post_originalcontent, post_numcomments, post_numcrossposts, post_score, post_awards, post_upvote_ratio, post_video_url])
+    filewrite.writerow([y, post_id, post_title, post_author, post_time, post_fullurl, post_numcomments, post_numcrossposts, post_score, post_video_url])
 
-with open(subreddit + '.csv', 'w', encoding='utf-8', newline='') as csvfile:
+with open(subreddit + '-' + after_time + '-' + before_time + '.csv', 'w', encoding='utf-8', newline='') as csvfile:
 
     filewrite=csv.writer(csvfile)
-    filewrite.writerow(['Post Number', 'Post ID', 'Title', 'Post Author', 'Time', 'Full Url', 'Original Content', 'Comments Amount', 'Crossposts Amount', 'Post Score', 'Post Awards', 'Post Upvotes Ratio', 'Post Video Url'])
+    filewrite.writerow(['Post Number', 'Post ID', 'Title', 'Post Author', 'Time', 'Full Url', 'Comments Amount', 'Crossposts Amount', 'Post Score', 'Post Video Url'])
 
     #API limits to 1000 req so we need to loop through them all
     for x in range(0, loopsreqint):

@@ -28,6 +28,7 @@ y=0
 # to get epoch time - !date "+%s" -d "02/20/2013 08:41:15"
 # to get current epoch time - !date '+%s'
 # epoch to day convert - !date -d @1591699036
+csv_time_human = "Jan2018"
 after_time = "1514764800"
 before_time = "1517443200"
 
@@ -66,8 +67,8 @@ def get_info(i):
     #writing to the csv
     filewrite.writerow([y, post_id, post_title, post_author, post_time, post_fullurl, post_numcomments, post_numcrossposts, post_score, post_video_url])
 
-with open(subreddit + '-' + after_time + '-' + before_time + '.csv', 'w', encoding='utf-8', newline='') as csvfile:
-
+#with open(subreddit + '-' + after_time + '-' + before_time + '.csv', 'w', encoding='utf-8', newline='') as csvfile:
+with open(subreddit + '-' + csv_time_human + '.csv', 'w', encoding='utf-8', newline='') as csvfile:
     filewrite=csv.writer(csvfile)
     filewrite.writerow(['Post Number', 'Post ID', 'Title', 'Post Author', 'Time', 'Full Url', 'Comments Amount', 'Crossposts Amount', 'Post Score', 'Post Video Url'])
 

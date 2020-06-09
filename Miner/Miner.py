@@ -51,15 +51,23 @@ def get_info(i):
     post_id = json_data['data'][i]['id']
     post_title = json_data['data'][i]['title']
     post_author = json_data['data'][i]['author']
-    post_time = json_data['data'][i]['created_utc'] 
+    post_time = json_data['data'][i]['created_utc']
+    post_fullurl = json_data['data'][i]['full_link']
+    post_originalcontent = json_data['data'][i]['is_original_content']
+    post_numcomments = json_data['data'][i]['num_comments']
+    post_numcrossposts = json_data['data'][i]['num_crossposts']
+    post_score = json_data['data'][i]['score']
+    post_awards = json_data['data'][i]['total_awards_received']
+    post_upvote_ratio = json_data['data'][i]['upvote_ratio']
+    post_video_url = json_data['data'][i]['url']
     print('\n%s' %y)
     #writing to the csv
-    filewrite.writerow([y, post_id, post_title, post_author, post_time])
+    filewrite.writerow([y, post_id, post_title, post_author, post_time, post_fullurl, post_originalcontent, post_numcomments, post_numcrossposts, post_score, post_awards, post_upvote_ratio, post_video_url])
 
 with open(subreddit + '.csv', 'w', encoding='utf-8', newline='') as csvfile:
 
     filewrite=csv.writer(csvfile)
-    filewrite.writerow(['Post Number', 'Post ID', 'Title', 'Post Author', 'Time'])
+    filewrite.writerow(['Post Number', 'Post ID', 'Title', 'Post Author', 'Time', 'Full Url', 'Original Content', 'Comments Amount', 'Crossposts Amount', 'Post Score', 'Post Awards', 'Post Upvotes Ratio', 'Post Video Url'])
 
     #API limits to 1000 req so we need to loop through them all
     for x in range(0, loopsreqint):

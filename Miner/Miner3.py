@@ -77,7 +77,7 @@ with open(subreddit + '.csv', 'w', encoding='utf-8', newline='') as csvfile:
     for x in range(0, loopsreqint):
 
         #Loading API, lopping through using the last submisisons time and then pulling the next 1000 from that
-        main_API = ''https://api.pushshift.io/reddit/submission/search/?subreddit=' + subreddit + '&sort_type=score&sort=desc&size=1000&after=' + after_time + '&before=' + before_time&size=1000&before=' + str(post_time)
+        main_API = 'https://api.pushshift.io/reddit/submission/search/?subreddit=' + subreddit + '&sort_type=score&sort=desc&size=1000&after=' + after_time + '&before=' + before_time&size=1000&before=' + str(post_time)
         json_data = requests.get(main_API).json()
 
 
